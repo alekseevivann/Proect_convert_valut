@@ -11,10 +11,7 @@ class МойКонвертер {
     private var курсЕвро = 89.92
 
     fun старт() {
-        println("=".repeat(30))
         println("Конвертер валют")
-        println("=".repeat(30))
-
         while (true) {
             println("\nЧто будем делать?")
             println("1. Конвертировать валюту")
@@ -36,7 +33,6 @@ class МойКонвертер {
     }
 
     private fun конвертировать() {
-        println("\n" + "-".repeat(25))
         println("1. Рубли -> Доллары")
         println("2. Рубли -> Евро")
         println("3. Доллары -> Рубли")

@@ -1,46 +1,89 @@
 import java.util.Scanner
 
-fun main(){
-    val scanner = Scanner(System. `in`)
-    val курсДоллара = 77.50
-    val курсЕвро = 89.92
+fun main() {
+    val мойКонвертер = МойКонвертер()
+    мойКонвертер.старт()
+}
 
-    println("Это конвертер валют")
-    println("Выберите конверт")
-    println("1. Рубли в Доллары")
-    println("2. Рубли в Евро")
-    println("3. Доллары в Рубли")
-    println("4. Евро в Рубли")
-    print("Выберите цифру (1-4) ")
+class МойКонвертер {
+    private val сканер = Scanner(System.`in`)
+    private var курсДоллара = 77.50
+    private var курсЕвро = 89.92
 
-    val выбор = scanner.nextInt()
-    when (выбор){
-        1 ->{
-            print("Сколько рублей? ")
-            val рубли = scanner.nextDouble()
-            val доллары = рубли / курсДоллара
-            println("Это будет: ${"%.2f".format(доллары)} долларов")
+    fun старт() {
+        println("=".repeat(30))
+        println("Конвертер валют")
+        println("=".repeat(30))
+
+        while (true) {
+            println("\nЧто будем делать?")
+            println("1. Конвертировать валюту")
+            println("2. Показать курсы")
+            println("3. Изменить курсы")
+            println("4. Выйти")
+            print("Выбери: ")
+
+            when (сканер.nextInt()) {
+                1 -> конвертировать()
+                2 -> показатьКурсы()
+                3 -> изменитьКурсы()
+                4 -> {
+                    println("Пока!")
+                    return
+                }
+            }
         }
+    }
 
-        2 ->{
-            print("Сколько рублей? " )
-            val рубли = scanner.nextDouble()
-            val евро = рубли / курсЕвро
-            println("Это будет: ${"%.2f".format(евро)} евро")
-        }
+    private fun конвертировать() {
+        println("\n" + "-".repeat(25))
+        println("1. Рубли -> Доллары")
+        println("2. Рубли -> Евро")
+        println("3. Доллары -> Рубли")
+        println("4. Евро -> Рубли")
+        print("Выбери конвертацию: ")
 
-        3 ->{
-            print("Сколько долларов? ")
-            val доллары = scanner.nextDouble()
-            val рубли = доллары * курсДоллара
-            println("Это будет: ${"%.2f".format(рубли)} рублей")
+        when (сканер.nextInt()) {
+            1 -> {
+                print("Сколько рублей? ")
+                val рубли = сканер.nextDouble()
+                println(" ${рубли} RUB = ${рубли / курсДоллара} USD")
+            }
+            2 -> {
+                print("Сколько рублей? ")
+                val рубли = сканер.nextDouble()
+                println(" ${рубли} RUB = ${рубли / курсЕвро} EUR")
+            }
+            3 -> {
+                print("Сколько долларов? ")
+                val доллары = сканер.nextDouble()
+                println(" ${доллары} USD = ${доллары * курсДоллара} RUB")
+            }
+            4 -> {
+                print("Сколько евро? ")
+                val евро = сканер.nextDouble()
+                println(" ${евро} EUR = ${евро * курсЕвро} RUB")
+            }
         }
+    }
 
-        4 ->{
-            print("Сколько евро? ")
-            val евро = scanner.nextDouble()
-            val рубли = евро * курсЕвро
-            println("Это будет: ${"%.2а".format(рубли)} рублей")
-        }
+    private fun показатьКурсы() {
+        println("\n Текущие курсы:")
+        println("1 USD = $курсДоллара RUB")
+        println("1 EUR = $курсЕвро RUB")
+    }
+
+    private fun изменитьКурсы() {
+        println("\n Изменение курсов валют")
+        print("Введите новый курс доллара (USD/RUB): ")
+        val новыйКурсДоллара = сканер.nextDouble()
+
+        print("Введите новый курс евро (EUR/RUB): ")
+        val новыйКурсЕвро = сканер.nextDouble()
+
+        курсДоллара = новыйКурсДоллара
+        курсЕвро = новыйКурсЕвро
+
+        println("Курсы успешно обновлены!")
     }
 }
